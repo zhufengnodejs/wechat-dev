@@ -31,7 +31,7 @@ app.get('/callback', function (req, res) {
     let userUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`;
     console.log(userUrl);
     getJSON(userUrl,function(err,user){
-        res.render('user',{user});
+        res.render('user.ejs',{user});
     })
   });
 });
