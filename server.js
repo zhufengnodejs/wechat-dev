@@ -21,21 +21,29 @@ app.get('/login', function (req, res) {
   //console.log('authUrl',authUrl);
   res.redirect(authUrl);
 });
+let Set = new Set();
 app.get('/callback', function (req, res) {
   let {code} = req.query;
-  console.log(`code ${code}`);
-  let accessUrl = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${APPID}&secret=${APPSECRET}&code=${code}&grant_type=authorization_code`;
-  //console.log('accessUrl',accessUrl);
-  getJSON(accessUrl, function (err, data) {
-    //console.log(data);
-    let {access_token, openid} = data;
-    //console.log(access_token, openid);
-    let userUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`;
-   // console.log(userUrl);
-    getJSON(userUrl,function(err,user){
+
+  if(!Set.has(code)){
+    Set.add(code);
+    console.log(`code ${code}`);
+    let accessUrl = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${APPID}&secret=${APPSECRET}&code=${code}&grant_type=authorization_code`;
+    //console.log('accessUrl',accessUrl);
+    getJSON(accessUrl, function (err, data) {
+      //console.log(data);
+      let {access_token, openid} = data;
+      //console.log(access_token, openid);
+      let userUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`;
+      // console.log(userUrl);
+      getJSON(userUrl,function(err,user){
         res.render('user.ejs',{user});
-    })
-  });
+      })
+    });
+  }else{
+    res.send('other')
+  }
+
 });
 app.listen(80);
 
