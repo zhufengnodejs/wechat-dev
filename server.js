@@ -18,13 +18,13 @@ app.get('/', function (req, res) {
 let REDIRECT_URI = encodeURIComponent('http://123.57.223.74/callback');
 app.get('/login', function (req, res) {
   let authUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${APPID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect`;
-  console.log(authUrl);
+  console.log('authUrl',authUrl);
   res.redirect(authUrl);
 });
 app.get('/callback', function (req, res) {
   let {code} = req.query;
   let accessUrl = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${APPID}&secret=${APPSECRET}&code=${code}&grant_type=authorization_code`;
-  console.log(accessUrl);
+  console.log('accessUrl',accessUrl);
   getJSON(accessUrl, function (err, data) {
     console.log(data);
     let {access_token, openid} = data;
