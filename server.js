@@ -26,6 +26,7 @@ app.get('/callback', function (req, res) {
   let accessUrl = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${APPID}&secret=${APPSECRET}&code=${code}&grant_type=authorization_code`;
   console.log(accessUrl);
   getJSON(accessUrl, function (err, data) {
+    console.log(data);
     let {access_token, openid} = data;
     console.log(access_token, openid);
     let userUrl = `https://api.weixin.qq.com/sns/userinfo?access_token=${access_token}&openid=${openid}&lang=zh_CN`;
