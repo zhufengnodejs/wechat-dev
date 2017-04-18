@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <style>
+    .container{
+      margin:30px auto;
+    }
+    table,td{
+      border:1px solid gray;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <table>
+    <tr>
+      <td>呢称</td>
+      <td><%=user.nickname%></td>
+    </tr>
+    <tr>
+      <td>头像</td>
+      <td><img src="<%=user.headimgurl%>"></td>
+    </tr>
+    <tr>
+      <td>性别</td>
+      <td><%=user.sex==0?'女':'男'%></td>
+    </tr>
+    <tr>
+      <td>省</td>
+      <td><%=user.province%></td>
+    </tr>
+    <tr>
+      <td>市</td>
+      <td><%=user.city%></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
