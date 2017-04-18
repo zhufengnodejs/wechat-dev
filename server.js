@@ -21,12 +21,12 @@ app.get('/login', function (req, res) {
   //console.log('authUrl',authUrl);
   res.redirect(authUrl);
 });
-let Set = new Set();
+let codeObj = {};
 app.get('/callback', function (req, res) {
   let {code} = req.query;
 
-  if(!Set.has(code)){
-    Set.add(code);
+  if(!codeObj[code]){
+    codeObj[code] =code;
     console.log(`code ${code}`);
     let accessUrl = `https://api.weixin.qq.com/sns/oauth2/access_token?appid=${APPID}&secret=${APPSECRET}&code=${code}&grant_type=authorization_code`;
     //console.log('accessUrl',accessUrl);
